@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daffodil's Tutor | Premium Tuition Media</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root { --diu-green: #00ff88; --diu-orange: #f26522; --neon-blue: #00d2ff; --deep-black: #000000; --body-light-black: #121212; }
+        body { background-color: var(--body-light-black); color: #e5e7eb; overflow-x: hidden; font-family: 'Inter', sans-serif; }
+        .neon-icon { position: fixed; font-size: 1.8rem; color: rgba(242, 101, 34, 0.12); z-index: -1; pointer-events: none; animation: moveIcons 25s linear infinite; }
+        @keyframes moveIcons { 0% { transform: translate(-10vw, 110vh) rotate(0deg); } 100% { transform: translate(110vw, -10vh) rotate(360deg); } }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 2rem; transition: 0.3s; }
+        .glass-card:hover { border-color: var(--diu-orange); box-shadow: 0 0 20px rgba(242, 101, 34, 0.15); }
+        .header-deep, .footer-deep { background-color: var(--deep-black); border-color: rgba(255,255,255,0.05); }
+        .btn-neon-orange { border: 2px solid var(--diu-orange); color: white; transition: 0.4s; }
+        .btn-neon-orange:hover { background: var(--diu-orange); box-shadow: 0 0 25px var(--diu-orange); transform: translateY(-3px); }
+        .btn-neon-green { border: 2px solid var(--diu-green); color: white; transition: 0.4s; }
+        .btn-neon-green:hover { background: var(--diu-green); color: black; box-shadow: 0 0 25px var(--diu-green); transform: translateY(-3px); }
+        .form-label-neon { color: var(--neon-blue); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; }
+        .input-neon { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.1) !important; color: #fff !important; }
+        .input-neon:focus { border-color: var(--diu-orange) !important; box-shadow: 0 0 15px rgba(242, 101, 34, 0.3) !important; }
+        option { background: #111; color: white; }
+        .modal-legal { background: rgba(0,0,0,0.95); display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow-y: auto; padding: 20px; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--deep-black); }
+        ::-webkit-scrollbar-thumb { background: var(--diu-orange); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <i class="fas fa-book neon-icon" style="left: 5%; animation-delay: 0s;"></i>
+    <i class="fas fa-pen-nib neon-icon" style="left: 20%; animation-delay: 5s;"></i>
+    <i class="fas fa-graduation-cap neon-icon" style="left: 40%; animation-delay: 10s;"></i>
+    <i class="fas fa-pencil-alt neon-icon" style="left: 60%; animation-delay: 2s;"></i>
+    <i class="fas fa-clipboard-list neon-icon" style="left: 80%; animation-delay: 7s;"></i>
+    <i class="fas fa-eraser neon-icon" style="left: 30%; animation-delay: 15s;"></i>
+    <i class="fas fa-user-graduate neon-icon" style="left: 50%; animation-delay: 12s;"></i>
+
+    <header class="header-deep sticky top-0 z-50 py-4 border-b">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="logo.png" class="h-10 invert">
+                <span class="text-2xl font-black text-white">DAFFODIL'S <span class="text-diu-orange">TUTOR</span></span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <nav class="hidden lg:flex space-x-6 text-xs font-black uppercase tracking-widest text-gray-400">
+                    <a href="#" class="hover:text-diu-orange transition">Home</a>
+                    <a href="#offers" class="hover:text-diu-orange transition">Tution Offers</a>
+                    <a href="#request" class="hover:text-diu-orange transition">Hire A Tutor</a>
+                </nav>
+                <select id="langSwitch" onchange="toggleLanguage()" class="bg-transparent border border-gray-700 p-1 rounded font-bold text-xs text-white">
+                    <option value="en">EN</option>
+                    <option value="bn">বাংলা</option>
+                </select>
+                <button onclick="showAdmin()" class="text-gray-500 hover:text-white"><i class="fas fa-shield-alt text-xl"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto py-12 px-4">
+        <section class="text-center py-20">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 text-white" data-key="hero_title">Expert DIU Tutors</h1>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-12 text-lg" data-key="hero_subtitle">Premium tuition network by the students of DIU for the community.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#request" class="btn-neon-green px-12 py-4 rounded-xl font-black uppercase tracking-widest">Hire Tutor</a>
+                <a href="https://forms.gle/YOUR_LINK" target="_blank" class="btn-neon-orange px-12 py-4 rounded-xl font-black uppercase tracking-widest">Join as Tutor</a>
+            </div>
+        </section>
+
+        <section id="offers" class="mb-24">
+            <div class="flex items-center justify-between mb-12">
+                <h2 class="text-3xl font-black uppercase tracking-tighter text-white" data-key="offer_title">Live Tuition Offers</h2>
+                <div class="h-px flex-1 bg-gradient-to-r from-diu-orange to-transparent ml-8"></div>
+            </div>
+            <div id="offerGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        </section>
+
+        <section id="request" class="glass-card p-12 max-w-5xl mx-auto mb-24">
+            <h2 class="text-4xl font-black text-center mb-12 text-white uppercase tracking-widest" data-key="form_title">Post Your Requirement</h2>
+             <form id="clientRequestForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <label class="form-label-neon">Student Identity (Name)</label>
+                    <input name="Student_Name" placeholder="Full Name" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2">
+                </div>
+                <div>
+                    <label class="form-label-neon">WhatsApp Contact</label>
+                    <input name="Phone" placeholder="+880" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2">
+                </div>
+
+                <div>
+                    <label class="form-label-neon">Student Gender</label>
+                    <select name="Student_Gender" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label-neon">Preferred Study Time</label>
+                    <input name="Study_Time" placeholder="e.g. 5:00 PM - 7:00 PM" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2">
+                </div>
+
+                <div>
+                    <label class="form-label-neon">Tutor Gender Preference</label>
+                    <select name="Tutor_Gender_Pref" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2">
+                        <option value="No Preference">No Preference</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label-neon">Select Area</label>
+                    <select name="Area" id="areaSelect" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2"></select>
+                </div>
+
+                <div>
+                    <label class="form-label-neon">Specific Location / Landmark</label>
+                    <input name="Other_Location" placeholder="Near Khagan Bazaar" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2">
+                </div>
+                <div>
+                    <label class="form-label-neon">Proposed Salary (BDT)</label>
+                    <input name="Proposed_Salary" placeholder="e.g. 5000" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="form-label-neon">Class / Level</label>
+                    <input name="Class" placeholder="e.g. Class 10" required class="w-full input-neon p-4 rounded-2xl outline-none mt-2">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="form-label-neon">Subjects & Other Details</label>
+                    <textarea name="Requirements" placeholder="List your subjects..." required class="w-full input-neon p-4 rounded-2xl h-32 outline-none mt-2"></textarea>
+                </div>
+                
+                <button type="submit" id="clientSubmitBtn" class="md:col-span-2 btn-neon-green py-5 rounded-2xl font-black uppercase tracking-widest">Publish Requirement</button>
+            </form>
+        </section>
+
+        <div class="glass-card p-10 border-diu-orange/20 max-w-4xl mx-auto text-center mb-20">
+            <i class="fas fa-info-circle text-diu-orange text-4xl mb-6"></i>
+            <h3 class="text-2xl font-bold text-white mb-4">একটি বিশেষ ঘোষণা</h3>
+            <p class="text-gray-400 leading-relaxed">
+                এটি <b>Daffodil International University (DIU)</b> এর নিজস্ব কোনো অফিসিয়াল সাইট নয়। এটি ড্যাফোডিল শিক্ষার্থীদের দ্বারা পরিচালিত একটি প্রাইভেট টিউশন মিডিয়া প্লাটফর্ম। আমাদের মূল লক্ষ্য হলো ড্যাফোডিল স্মার্ট সিটির পার্শ্ববর্তী এলাকাবাসী এবং শিক্ষার্থীদের মাঝে একটি সহজ ও নিরাপদ মাধ্যম তৈরি করা, যার মাধ্যমে এলাকাবাসী এবং ড্যাফোডিল শিক্ষার্থী উভয়েই উপকৃত হবে।
+            </p>
+        </div>
+    </main>
+
+    <footer class="footer-deep pt-20 pb-10 border-t border-white/5">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <h3 class="text-3xl font-black text-white mb-6">DAFFODIL'S <span class="text-diu-orange">TUTOR</span></h3>
+                <p class="text-gray-500 leading-relaxed max-w-sm">Student-run tuition media serving the Ashulia and Savar region with trusted academic experts from DIU.</p>
+                <div class="flex space-x-6 mt-8 text-2xl">
+                    <a href="#" class="text-green-500 hover:scale-125 transition"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="text-blue-500 hover:scale-125 transition"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-diu-orange hover:scale-125 transition"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Legal Policies</h4>
+                <ul class="space-y-4 text-xs text-gray-500 font-bold">
+                    <li><button onclick="openLegal('privacy')" class="hover:text-white transition">Privacy Policy</button></li>
+                    <li><button onclick="openLegal('terms')" class="hover:text-white transition">Terms of Service</button></li>
+                    <li><button onclick="openLegal('tutor')" class="hover:text-white transition">Tutor Agreement</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-6 uppercase tracking-widest text-xs">Contact Information</h4>
+                <p class="text-[11px] text-gray-500 mb-2">Ashulia, Savar, Dhaka</p>
+                <p class="text-[11px] text-gray-500">Phone: +880 1XXX-XXXXXX</p>
+            </div>
+        </div>
+        <div class="text-center mt-20 pt-8 border-t border-white/5 text-[10px] text-gray-700 font-black tracking-[0.5em] uppercase">
+            © 2026 DAFFODIL'S TUTOR | BY STUDENTS FOR STUDENTS
+        </div>
+    </footer>
+
+    <div id="legalModal" class="modal-legal">
+        <div class="max-w-3xl mx-auto bg-black p-12 rounded-[3rem] border border-diu-orange/30 shadow-2xl relative">
+            <button onclick="closeLegal()" class="absolute top-8 right-8 text-3xl text-gray-600 hover:text-white">&times;</button>
+            <div id="legalContent" class="text-gray-400 leading-relaxed pt-8"></div>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="fixed inset-0 bg-black/98 z-[1001] hidden overflow-y-auto p-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-3xl font-black">ADMIN <span class="text-diu-orange">DASHBOARD</span></h2>
+                <button onclick="closeAdmin()" class="bg-red-600 px-8 py-2 rounded-xl font-bold uppercase text-xs">Exit</button>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="glass-card p-8">
+                    <h3 class="text-lg font-black mb-6 border-b border-white/10 pb-2">Publish New Job</h3>
+                    <div class="space-y-4">
+                        <input id="admSub" placeholder="Subject" class="w-full input-neon p-3 rounded-xl">
+                        <input id="admClass" placeholder="Class" class="w-full input-neon p-3 rounded-xl">
+                        <input id="admLoc" placeholder="Location" class="w-full input-neon p-3 rounded-xl">
+                        <input id="admSal" placeholder="Salary" class="w-full input-neon p-3 rounded-xl">
+                        <button onclick="postJob()" class="w-full btn-neon-orange py-4 rounded-xl font-black">POST TO BOARD</button>
+                    </div>
+                </div>
+                <div class="glass-card p-8">
+                    <h3 class="text-lg font-black mb-6 border-b border-white/10 pb-2 text-diu-green">Live Management</h3>
+                    <div id="adminManageList" class="space-y-4 overflow-y-auto max-h-[400px]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="applyModal" class="fixed inset-0 bg-black/90 z-[1001] hidden flex items-center justify-center p-4">
+        <div class="glass-card p-10 w-full max-w-sm border border-diu-orange/50">
+            <h3 class="text-2xl font-black text-white mb-6">Apply: <span id="targetJobId" class="text-diu-orange"></span></h3>
+            <form id="applyForm" class="space-y-6">
+                <input type="hidden" name="Job_ID" id="inputJobId">
+                <input name="Tutor_ID" required placeholder="Your Tutor ID (DT-XXXX)" class="w-full input-neon p-4 rounded-2xl text-center text-xl font-black">
+                <button type="submit" id="tutorApplyBtn" class="w-full btn-neon-orange py-4 rounded-2xl font-black">SUBMIT ID</button>
+                <button type="button" onclick="closeApply()" class="w-full text-xs text-gray-600 font-bold uppercase">Go Back</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDCX3LAzf8XfsmjSxtZiph6p_peWxTBJqWXAwbi8Ue67TWphqPUPBS9eJKEs9NM4Q/exec'; 
+        const AREAS = ["Khagan(খাগান)", "Akrain(আক্রাইন)", "Ashulia Bazar(আশুলিয়া বাঁজার)", "Dattapara(দত্তপাড়া)", "Paragram(পাড়াগ্রাম)", "BouBazar(বউবাজার-পাড়াগ্রাম)", "Charabag(চারাবাগ)", "Khejur Bagan(খেজুর বাগান)", "Sahdupara(সাধুপাড়া)", "KumKumari(কুমকুমারি বাঁজার)","Noyapara(নয়াপাড়া)","Rostompur(রুস্তম্পুর)","Deun(দেউন)","Changao(চানগাও)","Shooting Bari(শুটিংবাড়ি)"];
+        let jobs = [{ id: "DT-1001", subject: "English & Physics", class: "Grade 10", loc: "Khagan", salary: "6000/-" }];
+
+        const translations = {
+            en: { hero_title: "Expert DIU Tutors", hero_subtitle: "The most trusted tuition media by the students of Daffodil.", offer_title: "Live Tuition Offers", form_title: "Post Your Requirement" },
+            bn: { hero_title: "সেরা ডিআইইউ টিউটর", hero_subtitle: "ড্যাফোডিল শিক্ষার্থীদের দ্বারা পরিচালিত এলাকার সবচেয়ে নির্ভরযোগ্য টিউশন মিডিয়া।", offer_title: "চলমান টিউশন অফার", form_title: "আপনার চাহিদা জানান" }
+        };
+
+        const legalText = {
+            privacy: `<h2 class="text-2xl font-bold text-diu-orange">Privacy Policy</h2>
+                      <p>এটি একটি নিরাপদ প্লাটফর্ম। আমরা আপনার গোপনীয়তাকে সর্বোচ্চ গুরুত্ব দেই। আমাদের এখানে জমা দেওয়া কোনো তথ্য (নাম, মোবাইল নাম্বার বা অবস্থান) বাইরের কোনো থার্ড পার্টি বা কোনো অসাধু ব্যক্তির কাছে শেয়ার করা হয় না। আপনার তথ্য শুধুমাত্র আমাদের ভেরিফাইড টিউটর এবং অ্যাডমিনের কাছে সুরক্ষিত থাকে। Daffodil's Tutor একটি ফ্যামিলি ফ্রেন্ডলি মিডিয়া হিসেবে পরিচিত। আমরা এনক্রিপটেড ডাটাবেস ব্যবহার করি যাতে হ্যাকিং বা ডাটা চুরির কোনো সুযোগ না থাকে। আপনি নিশ্চিন্তে আপনার এবং আপনার সন্তানের তথ্য আমাদের কাছে জমা দিতে পারেন। গত ৩ বছর ধরে আমরা সুনামের সাথে এই গোপনীয়তা বজায় রেখে আসছি। ডাটাবেসে তথ্যগুলো সর্বোচ্চ ১ মাস থাকে, এরপর অটো ডিলিট হয়ে যায়। কোনো তথ্য বিক্রির ইতিহাস আমাদের নেই।</p>
+                      <p>আপনার ব্যক্তিগত তথ্য (যেমন ফোন নম্বর) শুধুমাত্র নির্দিষ্ট টিউটরের সাথে শেয়ার করা হবে যখন তিনি আপনার টিউশন অফারটি গ্রহণ করবেন। এর বাইরে অন্য কোনো উদ্দেশ্যে আপনার তথ্য ব্যবহৃত হবে না। ধন্যবাদ আমাদের সাথে থাকার জন্য।</p>`,
+            terms: `<h2 class="text-2xl font-bold text-diu-orange">Terms of Service</h2>
+                    <ul class="list-disc pl-5">
+                        <li>অভিভাবককে অবশ্যই শিক্ষার্থীর সঠিক তথ্য প্রদান করতে হবে।</li>
+                        <li>টিউশন শুরু হওয়ার আগে টিউটরের সাথে বিস্তারিত আলোচনা করে নিন।</li>
+                        <li>প্লাটফর্মের বাইরে কোনো লেনদেন বা সমস্যা হলে আমরা দায়ী থাকবো না।</li>
+                        <li>টিউটর যদি শিক্ষার্থীর সাথে অপেশাদার আচরণ করে, সাথে সাথে অভিযোগ জানাতে হবে।</li>
+                        <li>আমরা কোনো অগ্রিম টাকা অভিভাবকের কাছ থেকে নেই না।</li>
+                    </ul>`,
+            tutor: `<h2 class="text-2xl font-bold text-diu-orange">Tutor Agreement (অবশ্যই পড়ুন)</h2>
+                    <p>Daffodil's Tutor প্লাটফর্মে টিউটর হিসেবে কাজ করার জন্য আপনাকে নিচের শর্তগুলো মেনে চলতে হবে:</p>
+                    <p class="font-bold text-white border-l-4 border-diu-orange pl-3">১. প্রথম মাসের বেতনের ৫০% (৫০ শতাংশ) টাকা টিউশন মিডিয়াকে কমিশন হিসেবে দিতে হবে। এটি বাধ্যতামূলক।</p>
+                    <p>২. টিউশন কনফার্ম হওয়ার ৭ কার্যদিবসের মধ্যে এই পেমেন্ট সম্পন্ন করতে হবে।</p>
+                    <p>৩. যদি কোনো টিউটর টিউশন নিয়ে মিডিয়াকে না জানিয়ে লুকানোর চেষ্টা করে বা পেমেন্ট দিতে অস্বীকৃতি জানায়, তবে Daffodil's Tutor কর্তৃপক্ষ উক্ত টিউটরের বিরুদ্ধে আইনি ব্যবস্থা নেওয়ার পূর্ণ অধিকার রাখে।</p>
+                    <p>৪. ভুয়া তথ্য বা জাল সার্টিফিকেট দিলে আইডি স্থায়ীভাবে ব্যান করা হবে।</p>
+                    <p>৫. টিউশনের মাঝপথে কোনো কারণ ছাড়াই বাদ দিলে জরিমানার বিধান রয়েছে।</p>
+                    <p>আমরা চাই শিক্ষিত সমাজ গড়ে তুলতে এবং আমাদের টিউটরদের সম্মান রক্ষা করতে। এই মিডিয়া শুধুমাত্র আপনাদের সুবিধার জন্য তৈরি। কোনো প্রকার জালিয়াতি বরদাস্ত করা হবে না।</p>`
+        };
+
+        function render() {
+            const grid = document.getElementById('offerGrid');
+            const admList = document.getElementById('adminManageList');
+            grid.innerHTML = jobs.map(j => `
+                <div class="glass-card p-8 group relative overflow-hidden">
+                    <span class="text-[10px] font-black text-diu-orange tracking-widest uppercase">Ref: ${j.id}</span>
+                    <h3 class="text-2xl font-black text-white mt-3 mb-2">${j.subject}</h3>
+                    <p class="text-sm font-bold text-gray-500 mb-8 uppercase">${j.class} • ${j.loc}</p>
+                    <div class="flex justify-between items-center mb-10 bg-white/5 p-4 rounded-2xl">
+                        <span class="text-xl font-black text-white">${j.salary}</span>
+                        <i class="fas fa-check-circle text-diu-green"></i>
+                    </div>
+                    <button onclick="openApply('${j.id}')" class="w-full btn-neon-green py-4 rounded-2xl font-black uppercase text-xs">Apply Now</button>
+                </div>
+            `).join('');
+
+            admList.innerHTML = jobs.map(j => `
+                <div class="flex justify-between items-center p-4 bg-white/5 rounded-2xl border border-white/5">
+                    <div><p class="text-xs font-black text-diu-orange">${j.id}</p><p class="text-sm font-bold">${j.subject}</p></div>
+                    <button onclick="deleteJob('${j.id}')" class="text-red-500 bg-red-500/10 px-4 py-2 rounded-xl text-[10px] font-black hover:bg-red-500 hover:text-white transition">DELETE</button>
+                </div>
+            `).join('');
+        }
+
+        function postJob() {
+            const j = { id: "DT-"+Math.floor(1000+Math.random()*9000), subject: document.getElementById('admSub').value, class: document.getElementById('admClass').value, loc: document.getElementById('admLoc').value, salary: document.getElementById('admSal').value };
+            if(!j.subject || !j.salary) return alert("Fill all fields!");
+            jobs.unshift(j); render(); alert("Successfully Posted!");
+        }
+
+        function deleteJob(id) { if(confirm("Are you sure?")) { jobs = jobs.filter(j => j.id !== id); render(); } }
+        function openApply(id) { document.getElementById('applyModal').style.display='flex'; document.getElementById('targetJobId').innerText=id; document.getElementById('inputJobId').value=id; }
+        function closeApply() { document.getElementById('applyModal').style.display='none'; }
+        function showAdmin() { if(prompt("Security Login:") === "P@sswordk1?") document.getElementById('adminPanel').style.display='block'; }
+        function closeAdmin() { document.getElementById('adminPanel').style.display='none'; }
+        function openLegal(type) { document.getElementById('legalContent').innerHTML = legalText[type]; document.getElementById('legalModal').style.display = 'block'; }
+        function closeLegal() { document.getElementById('legalModal').style.display = 'none'; }
+        function toggleLanguage() { const l = document.getElementById('langSwitch').value; document.querySelectorAll('[data-key]').forEach(el => el.innerText = translations[l][el.getAttribute('data-key')]); }
+
+        // Client Form Submission
+        document.getElementById('clientRequestForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('clientSubmitBtn');
+            btn.innerText = "Processing..."; btn.disabled = true;
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', body: new FormData(e.target) });
+                alert("Requirement Sent Successfully!"); e.target.reset();
+            } catch (err) { alert("Server connection error."); }
+            btn.innerText = "Publish Requirement"; btn.disabled = false;
+        };
+
+        // NEW: Tutor Application Form Submission
+        document.getElementById('applyForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('tutorApplyBtn');
+            btn.innerText = "Submitting..."; btn.disabled = true;
+            try {
+                // Sending data to Google Sheets
+                await fetch(SCRIPT_URL, { method: 'POST', body: new FormData(e.target) });
+                alert("Applied! Your ID has been recorded to the Google Sheet.");
+                e.target.reset();
+                closeApply();
+            } catch (err) { alert("Server connection error. Please try again."); }
+            btn.innerText = "SUBMIT ID"; btn.disabled = false;
+        };
+
+        window.onload = () => {
+            const s = document.getElementById('areaSelect');
+            AREAS.forEach(a => s.add(new Option(a, a)));
+            render();
+        };
+    </script>
+</body>
+</html>
